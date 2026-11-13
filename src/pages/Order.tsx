@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useOrder } from '../context/OrderContext'
 import { getVariety, varieties, type Variety } from '../data/varieties'
 import { PillButton } from '../components/Pill'
 import { OrderFooter } from '../components/OrderFooter'
+import { formatPrice } from '../lib/price'
 
 function Counter({
   variety,
@@ -49,6 +50,18 @@ export function Order() {
   const navigate = useNavigate()
   const appliedSlug = useRef<string | null>(null)
 
+  const estimatedTotal = useMemo(() => {
+    const chosen = varieties.filter((variety) => (quantities[variety.slug] ?? 0) > 0)
+    if (chosen.length === 0) return null
+    if (chosen.some((variety) => variety.price === null)) return null
+
+    return chosen.reduce(
+      (total, variety) =>
+        total + (quantities[variety.slug] ?? 0) * (variety.price ?? 0),
+      0,
+    )
+  }, [quantities])
+
   useEffect(() => {
     const slug = searchParams.get('v')
     if (!slug || appliedSlug.current === slug) return
@@ -78,7 +91,7 @@ export function Order() {
             página.
           </p>
           <p className="mt-2 max-w-[600px] text-[13px] leading-[1.45] text-brown">
-            Variedades e imágenes ilustrativas · Catálogo, precios y
+            Variedades e imágenes ilustrativas · Precios por unidad,
             disponibilidad a confirmar.
           </p>
         </div>
@@ -108,7 +121,9 @@ export function Order() {
                         {variety.description}
                       </p>
                       <p className="text-[14px] font-semibold leading-[1.45] text-brown">
-                        Precio a confirmar
+                        {variety.price !== null
+                          ? `${formatPrice(variety.price)} c/u`
+                          : 'Precio a confirmar'}
                         {variety.note ? (
                           <span className="font-normal text-ink">
                             {' '}
@@ -171,8 +186,21 @@ export function Order() {
               </span>
             </div>
 
+            {estimatedTotal !== null && (
+              <div className="flex items-center justify-between border-t border-line pt-5">
+                <span className="text-[17px] font-semibold leading-[1.45] text-brown">
+                  Total estimado
+                </span>
+                <span className="font-display text-[24px] font-bold leading-[1.1] text-brown">
+                  {formatPrice(estimatedTotal)}
+                </span>
+              </div>
+            )}
+
             <p className="text-[16px] leading-[1.45] text-brown">
-              El importe y la entrega se coordinan por WhatsApp.
+              {estimatedTotal !== null
+                ? 'El pago y la entrega se coordinan por WhatsApp.'
+                : 'El importe y la entrega se coordinan por WhatsApp.'}
             </p>
 
             <PillButton

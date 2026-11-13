@@ -159,7 +159,7 @@ export function Home() {
         <div className="mx-auto grid max-w-[1440px] items-center gap-10 lg:grid-cols-2 lg:gap-[72px]">
           <img
             src="/img/alfajores mini-landing.webp"
-            alt="Alfajores de chocolate y de maicena de Esencia"
+            alt="Alfajores de chocolate y de coco de Esencia"
             loading="lazy"
             className="aspect-[590/430] w-full rounded-[20px] object-cover"
           />

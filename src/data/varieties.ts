@@ -10,6 +10,8 @@ export type Variety = {
   imageAlt: string
   /** Unidades que suma cada click en el contador. */
   step: number
+  /** Precio por unidad en pesos. `null` = se confirma por WhatsApp. */
+  price: number | null
   /** Texto chico debajo del precio. */
   note?: string
 }
@@ -26,17 +28,20 @@ export const varieties: Variety[] = [
     image: '/img/alfajores chocolate.webp',
     imageAlt: 'Alfajores de chocolate negro de Esencia',
     step: 1,
+    price: null,
   },
   {
-    slug: 'maicena',
-    name: 'Maicena',
-    messageName: 'Alfajores de Maicena',
-    singularMessageName: 'Alfajor de Maicena',
-    description: 'Tapitas de maicena, dulce de leche y coco.',
-    tagline: 'Un clásico, hecho con coco rallado.',
-    image: '/img/alfajores maicena.webp',
-    imageAlt: 'Alfajores de maicena con coco de Esencia',
+    slug: 'coco',
+    name: 'Coco',
+    messageName: 'Alfajores de Coco',
+    singularMessageName: 'Alfajor de Coco',
+    description:
+      'Masa de alfajor clásica con dulce de leche y coco rallado en lugar de chocolate.',
+    tagline: 'La masa de siempre, con coco rallado en vez de chocolate.',
+    image: '/img/alfajores coco.webp',
+    imageAlt: 'Alfajores con coco rallado de Esencia',
     step: 1,
+    price: null,
   },
   {
     slug: 'mini-chocolate',
@@ -48,18 +53,7 @@ export const varieties: Variety[] = [
     image: '/img/alfajores mini chocolate.webp',
     imageAlt: 'Mini alfajores de chocolate de Esencia',
     step: 3,
-    note: 'Se venden por 3 u.',
-  },
-  {
-    slug: 'mini-maicena',
-    name: 'Alfajores mini (Maicena)',
-    messageName: 'Alfajores mini de Maicena',
-    description:
-      'Mini alfajores de maicena con coco, se venden por 3 unidades.',
-    tagline: 'El clásico de maicena en versión mini.',
-    image: '/img/alfajores mini maicena.webp',
-    imageAlt: 'Mini alfajores de maicena de Esencia',
-    step: 3,
+    price: null,
     note: 'Se venden por 3 u.',
   },
 ]
@@ -73,18 +67,18 @@ export const landingVarieties = [
     alt: 'Alfajores de chocolate negro de Esencia',
   },
   {
-    slug: 'maicena',
-    name: 'Maicena',
-    tagline: 'Un clásico, hecho con coco rallado.',
-    image: '/img/alfajores maicena.webp',
-    alt: 'Alfajores de maicena con coco de Esencia',
+    slug: 'coco',
+    name: 'Coco',
+    tagline: 'La masa de siempre, con coco rallado en vez de chocolate.',
+    image: '/img/alfajores coco.webp',
+    alt: 'Alfajores con coco rallado de Esencia',
   },
   {
     slug: 'mini',
     name: 'Alfajores mini',
     tagline: 'Mismo sabor, pero con diferente esencia. Para darte un gustito.',
-    image: '/img/alfajores mini-landing.webp',
-    alt: 'Alfajores mini de chocolate y de maicena de Esencia',
+    image: '/img/alfajores mini chocolate.webp',
+    alt: 'Mini alfajores de chocolate de Esencia',
   },
 ]
 

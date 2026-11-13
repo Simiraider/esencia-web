@@ -29,7 +29,11 @@ function readStoredQuantities(): Quantities {
   const base = emptyQuantities()
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
+    // El pedido vive solo mientras la pestaña está abierta: al cerrarla se
+    // reinicia, así no quedan las cantidades de una compra anterior.
+    const raw = window.sessionStorage.getItem(STORAGE_KEY)
+    // Limpieza de versiones anteriores, que guardaban el pedido para siempre.
+    window.localStorage.removeItem(STORAGE_KEY)
     if (!raw) return base
 
     const parsed = JSON.parse(raw) as Record<string, unknown>
@@ -53,7 +57,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(quantities))
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(quantities))
     } catch {
       // El pedido sigue funcionando aunque el navegador no permita guardar.
     }

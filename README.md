@@ -8,7 +8,8 @@ Pasar a código el diseño de Figma `EsenciaWebsite.pdf`.
 - Vite + React + TypeScript
 - Tailwind CSS (paleta y tipografías de la marca en `tailwind.config.js`)
 - React Router (`/`, `/pedido`, `/whatsapp`)
-- Sin backend: el pedido vive en el navegador (localStorage) y se envía por WhatsApp
+- Sin backend: el pedido vive en el navegador (sessionStorage) y se envía por WhatsApp.
+  Al cerrar la pestaña se reinicia, así no quedan cantidades de una compra anterior.
 
 ## Desarrollo
 
@@ -37,6 +38,12 @@ signos, por ejemplo `5491138322817`) en Vercel o en un archivo `.env.local`.
 
 Si la variable queda vacía, la página de WhatsApp muestra el estado "falta
 configurar el número" con el envío deshabilitado.
+
+## Precios
+
+Los precios por unidad se cargan en `src/data/varieties.ts` (campo `price`).
+Mientras estén en `null`, la página muestra "Precio a confirmar" y no calcula
+el total estimado. No hace falta tocar el resto del código.
 
 ## Contenido
 
