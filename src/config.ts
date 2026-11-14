@@ -3,7 +3,7 @@
  * Se puede sobreescribir con la variable de entorno VITE_WHATSAPP_NUMBER
  * (por ejemplo en Vercel) sin tocar el código.
  */
-const PHONE = import.meta.env.VITE_WHATSAPP_NUMBER ?? '5491138322817'
+const PHONE = import.meta.env.VITE_WHATSAPP_NUMBER ?? '5491164721342'
 
 export const WHATSAPP_NUMBER = String(PHONE).replace(/\D/g, '')
 
@@ -13,7 +13,7 @@ export function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
-/** Formato legible: +54 9 11 3832 2817 */
+/** Formato legible: +54 9 11 6472 1342 */
 export function formatWhatsAppNumber() {
   const digits = WHATSAPP_NUMBER
 

@@ -34,7 +34,7 @@ rewrites necesarias para que `/pedido` y `/whatsapp` funcionen al recargar.
 
 El número por defecto está en `src/config.ts`. Para cambiarlo sin tocar código,
 definí la variable de entorno `VITE_WHATSAPP_NUMBER` (con código de país y sin
-signos, por ejemplo `5491138322817`) en Vercel o en un archivo `.env.local`.
+signos, por ejemplo `5491164721342`) en Vercel o en un archivo `.env.local`.
 
 Si la variable queda vacía, la página de WhatsApp muestra el estado "falta
 configurar el número" con el envío deshabilitado.
